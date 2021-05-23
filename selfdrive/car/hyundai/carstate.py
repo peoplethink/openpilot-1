@@ -98,6 +98,8 @@ class CarState(CarStateBase):
       self.driverAcc_time = 100
     elif self.driverAcc_time:
       self.driverAcc_time -= 1
+    if self.CP.enableAutoHold:
+      ret.autoHold = cp.vl["ESP11"]['AVH_STAT']
 
     # cruise state
     ret.cruiseState.enabled = (cp_scc.vl["SCC12"]['ACCMode'] != 0) if not self.no_radar else \
@@ -353,8 +355,7 @@ class CarState(CarStateBase):
 
       ("CYL_PRES", "ESP12", 0),
 
-      ("AVH_STAT", "ESP11", 0),
-
+      
       ("CF_Clu_CruiseSwState", "CLU11", 0),
       ("CF_Clu_CruiseSwMain", "CLU11", 0),
       ("CF_Clu_SldMainSW", "CLU11", 0),
@@ -494,6 +495,13 @@ class CarState(CarStateBase):
         ("CF_Lca_IndRight", "LCA11", 0),
       ]
       checks += [("LCA11", 50)]
+
+    if CP.enableAutoHold:
+      signals += [
+        ("AVH_STAT", "ESP11", 0),
+        ("LDM_STAT", "ESP11", 0),
+      ]
+      checks += [("ESP11", 50)]
 
     if CP.carFingerprint in ELEC_VEH:
       signals += [

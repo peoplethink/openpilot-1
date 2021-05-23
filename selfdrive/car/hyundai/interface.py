@@ -232,10 +232,12 @@ class CarInterface(CarInterfaceBase):
     ret.longitudinalTuning.kdV = [0.]
 
     ret.enableCamera = True
-    ret.enableBsm = 0x58b in fingerprint[0]
-
+    
     ret.stoppingControl = True
     ret.startAccel = 0.0
+
+    ret.enableBsm = 0x58b in fingerprint[0]
+    ret.enableAutoHold = 1151 in fingerprint[0]
 
     ret.standStill = False
     ret.vCruisekph = 0
