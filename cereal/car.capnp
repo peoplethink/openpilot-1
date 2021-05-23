@@ -200,6 +200,8 @@ struct CarState {
   # blindspot sensors
   leftBlindspot @33 :Bool; # Is there something blocking the left lane change
   rightBlindspot @34 :Bool; # Is there something blocking the right lane change
+  
+  autoHold @49 : Int32;
 
   # tpms 
   tpmsPressureFl @37 :Float32;
@@ -469,6 +471,7 @@ struct CarParams {
   mdpsBus @57: Int8;
   sasBus @58: Int8;
   sccBus @59: Int8;
+  enableAutoHold @68 :Bool;
   fcaBus @60: Int8;
   bsmAvailable @61: Bool;
   lfaAvailable @62: Bool;
