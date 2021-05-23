@@ -221,6 +221,8 @@ void fill_model(cereal::ModelDataV2::Builder &framed, const ModelDataRaw &net_ou
   // plan
   const float *best_plan = get_plan_data(net_outputs.plan);
   float plan_t_arr[TRAJECTORY_SIZE];
+  plan_t_arr[0] = 0.0;
+  int xidx = 1, tidx = 0;
   for (int i=0; i<TRAJECTORY_SIZE; i++) {
     plan_t_arr[i] = best_plan[i*PLAN_MHP_COLUMNS + 15];
   }
